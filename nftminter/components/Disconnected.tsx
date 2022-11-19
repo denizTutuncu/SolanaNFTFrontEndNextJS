@@ -41,7 +41,7 @@ const Disconnected: FC = () => {
           noOfLines={2}
           textAlign="center"
         >
-          Mint your jaguar. Join $LGG. Level up.
+          Mint your city. Join AIC DAO. Level up.
         </Heading>
         <Button
           bgColor="accent"
@@ -50,7 +50,7 @@ const Disconnected: FC = () => {
           onClick={handleClick}
         >
           <HStack>
-            <Text>become a Jaguar</Text>
+            <Text>become a resident </Text>
             <ArrowForwardIcon />
           </HStack>
         </Button>
