@@ -37,8 +37,8 @@ const Disconnected: FC = () => {
         <Heading
           color="white"
           as="h1"
-          size="3xl"
-          noOfLines={2}
+          size="4xl"
+          noOfLines={0}
           textAlign="center"
         >
           Mint your city. Join AIC DAO. Level up.
@@ -46,7 +46,8 @@ const Disconnected: FC = () => {
         <Button
           bgColor="accent"
           color="white"
-          maxW="380px"
+          width={450}
+          height={75}
           onClick={handleClick}
         >
           <HStack>
