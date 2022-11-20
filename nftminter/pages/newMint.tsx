@@ -1,5 +1,4 @@
 import type { NextPage } from "next"
-import { useRouter } from "next/router"
 import { useConnection, useWallet } from "@solana/wallet-adapter-react"
 import MainLayout from "../components/MainLayout"
 import {
@@ -19,73 +18,16 @@ import {
   useState,
 } from "react"
 import { ArrowForwardIcon } from "@chakra-ui/icons"
-import { PublicKey, Transaction } from "@solana/web3.js"
+import { PublicKey } from "@solana/web3.js"
 import { Metaplex, walletAdapterIdentity } from "@metaplex-foundation/js"
-import { createInitializeStakeAccountInstruction, createStakeInstruction } from "../utils/instructions"
 
 const NewMint: NextPage<NewMintProps> = ({ mint }) => {
-  const [nftData, setNftData] = useState<any>()
+  const [metadata, setMetadata] = useState<any>()
   const { connection } = useConnection()
   const walletAdapter = useWallet()
-  const { publicKey, sendTransaction } = useWallet()
-
-  // metaplex setup
   const metaplex = useMemo(() => {
     return Metaplex.make(connection).use(walletAdapterIdentity(walletAdapter))
   }, [connection, walletAdapter])
-  const router = useRouter()
-
-  const handleClick: MouseEventHandler<HTMLButtonElement> =
-    useCallback(async () => {
-      if (publicKey) {
-        // get token account of NFT
-        const tokenAccount = (await connection.getTokenLargestAccounts(mint))
-          .value[0].address
-
-        // helper function to create initialize stake account instruction
-        const initializeStakeAccountInstruction =
-          createInitializeStakeAccountInstruction(publicKey, tokenAccount)
-
-        // helper functin to create stake instruction
-        const stakeInstruction = createStakeInstruction(
-          publicKey,
-          tokenAccount,
-          nftData.mint.address,
-          nftData.edition.address
-        )
-
-        // add instructions to new transaction
-        const transaction = new Transaction().add(
-          initializeStakeAccountInstruction,
-          stakeInstruction
-        )
-
-        // send transactions
-        try {
-          const transactionSignature = await sendTransaction(
-            transaction,
-            connection
-          )
-
-          // wait for confirmation
-          const latestBlockHash = await connection.getLatestBlockhash()
-          await connection.confirmTransaction({
-            blockhash: latestBlockHash.blockhash,
-            lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
-            signature: transactionSignature,
-          })
-
-          console.log(
-            `https://explorer.solana.com/tx/${transactionSignature}?cluster=devnet`
-          )
-
-          // push to new page
-          router.push(`/stake?mint=${mint}&imageSrc=${nftData?.json.image}`)
-        } catch (error) {
-          alert(error)
-        }
-      }
-    }, [router, mint, nftData])
 
   useEffect(() => {
     metaplex
@@ -93,9 +35,18 @@ const NewMint: NextPage<NewMintProps> = ({ mint }) => {
       .findByMint({ mintAddress: mint })
       .run()
       .then((nft) => {
-        setNftData(nft)
+        fetch(nft.uri)
+          .then((res) => res.json())
+          .then((metadata) => {
+            setMetadata(metadata)
+          })
       })
-  }, [mint, metaplex])
+  }, [mint, metaplex, walletAdapter])
+
+  const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback(
+    async (event) => {},
+    []
+  )
 
   return (
     <MainLayout>
@@ -103,17 +54,17 @@ const NewMint: NextPage<NewMintProps> = ({ mint }) => {
         <Container>
           <VStack spacing={8}>
             <Heading color="white" as="h1" size="2xl" textAlign="center">
-              😮 A new buildoor has appeared!
+              😮 A new city has appeared!
             </Heading>
 
             <Text color="bodyText" fontSize="xl" textAlign="center">
-              Congratulations, you minted a lvl 1 buildoor! <br />
-              Time to stake your character to earn rewards and level up.
+              Congratulations, you minted an AI CITY! <br />
+              Time to connect your city with AIC DAO earn We have thing to do!.
             </Text>
           </VStack>
         </Container>
 
-        <Image src={nftData?.json.image ?? ""} alt="" />
+        <Image src={metadata?.image ?? ""} alt="" />
 
         <Button
           bgColor="accent"
@@ -122,7 +73,7 @@ const NewMint: NextPage<NewMintProps> = ({ mint }) => {
           onClick={handleClick}
         >
           <HStack>
-            <Text>stake my buildoor</Text>
+            <Text>mint my ai city</Text>
             <ArrowForwardIcon />
           </HStack>
         </Button>
