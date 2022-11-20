@@ -21,10 +21,7 @@ import {
 import { ArrowForwardIcon } from "@chakra-ui/icons"
 import { PublicKey, Transaction } from "@solana/web3.js"
 import { Metaplex, walletAdapterIdentity } from "@metaplex-foundation/js"
-import {
-  createInitializeStakeAccountInstruction,
-  createStakeInstruction,
-} from "../utils/instructions"
+import { createInitializeStakeAccountInstruction, createStakeInstruction } from "../utils/instructions"
 
 const NewMint: NextPage<NewMintProps> = ({ mint }) => {
   const [nftData, setNftData] = useState<any>()

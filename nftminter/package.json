@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "reset-candy-machine": "rm tokens/candy-machine/cache.json && cd tokens/candy-machine && sugar launch",
-    "create-bld-token": "ts-node tokens/bld/index.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.9",
