@@ -88,19 +88,22 @@ const Connected: FC = () => {
             noOfLines={1}
             textAlign="center"
           >
-            Welcome AI CITY.
+            Welcome AI CITIES.
           </Heading>
           <VStack>
             <Image width={325} height={325} src="avatar5.png" alt="" />
           </VStack>
           <Text color="white" fontSize="xl" textAlign="center">
-            Each <Text as="b">AI CITY</Text> is randomly generated from AI and the key to <Text as="b"> AIC, </Text> AI City DAO on <Text as="b"> Realms. </Text>
+            Each <Text as="b">CITY</Text> is randomly generated from AI and the key to <Text as="b"> AIC, </Text> AI City DAO on <Text as="b"> Realms. </Text>
+          </Text>
+          <Text color="white" fontSize="l" textAlign="center" as="b"> 
+            DAO link: https://app.realms.today/dao/bbG3PnjjvDeWWEWY1miRgEKGqwep2FyAZNvir9YEGb9?cluster=devnet
           </Text>
         </VStack>
       </Container>
 
       <HStack spacing={10}>
-        <Image width={250} height={250} src="./avatar1.png" alt=""/>
+        <Image width={250} height={250} src="avatar1.png" alt=""/>
         <Image width={250} height={250} src="avatar2.png" alt="" />
         <Image width={250} height={250} src="avatar3.png" alt="" />
         <Image width={250} height={250} src="avatar4.png" alt="" />

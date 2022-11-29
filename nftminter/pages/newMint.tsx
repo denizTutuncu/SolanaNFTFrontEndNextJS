@@ -59,7 +59,7 @@ const NewMint: NextPage<NewMintProps> = ({ mint }) => {
 
             <Text color="bodyText" fontSize="xl" textAlign="center">
               Congratulations, you minted an AI CITY! <br />
-              Time to connect your city with AIC DAO earn We have thing to do!.
+              Time to connect your city with AIC DAO. We have thing to do!.
             </Text>
           </VStack>
         </Container>
@@ -73,7 +73,7 @@ const NewMint: NextPage<NewMintProps> = ({ mint }) => {
           onClick={handleClick}
         >
           <HStack>
-            <Text>mint my ai city</Text>
+            <Text>mint a city</Text>
             <ArrowForwardIcon />
           </HStack>
         </Button>
