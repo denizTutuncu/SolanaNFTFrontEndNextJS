@@ -88,7 +88,7 @@ const Connected: FC = () => {
             noOfLines={1}
             textAlign="center"
           >
-            Welcome AI CITIES.
+            Welcome to AI CITIES.
           </Heading>
           <VStack>
             <Image width={325} height={325} src="avatar5.png" alt="" />
